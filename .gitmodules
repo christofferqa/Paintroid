@@ -1,0 +1,3 @@
+[submodule "PaintroidTest/src/android"]
+	path = PaintroidTest/src/android
+	url = https://github.com/algobardo/android.testR2E.git
