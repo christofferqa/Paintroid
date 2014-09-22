@@ -56,7 +56,7 @@ public class BottomBar implements View.OnTouchListener {
 				return false;
 			}
 		} else if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-			view.setBackgroundResource(R.color.abs__holo_blue_light);
+			view.setBackgroundResource(R.color.abs__primary_text_holo_light); // CQA: abs__holo_blue_light removed in ActionBarSherlock 4.4.0
 		}
 		return false;
 	}
