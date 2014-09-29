@@ -32,6 +32,7 @@ import org.catrobat.paintroid.tools.ToolFactory;
 import org.catrobat.paintroid.tools.ToolType;
 import org.catrobat.paintroid.tools.implementation.DrawTool;
 
+import android.util.Log;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -45,6 +46,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class TopBar extends Observable implements OnTouchListener {
+	public static final String TAG = "TopBar";
 
 	public static enum ToolButtonIDs {
 		BUTTON_ID_TOOL, BUTTON_ID_PARAMETER_TOP, BUTTON_ID_PARAMETER_BOTTOM_1, BUTTON_ID_PARAMETER_BOTTOM_2
@@ -100,7 +102,7 @@ public class TopBar extends Observable implements OnTouchListener {
 	}
 
 	public void setTool(Tool tool) {
-
+		Log.i(TAG+"&Activity", "setTool(tool=" + tool + ")");
 		// ignore to set the same tool again. except stamptool -> reselect =
 		// reset selection.
 		if ((tool.getToolType() == mCurrentTool.getToolType())
@@ -191,7 +193,7 @@ public class TopBar extends Observable implements OnTouchListener {
 	private void onUndoTouch(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			if (!mUndoDisabled) {
-				mUndoButton.setBackgroundResource(R.color.abs__primary_text_holo_light); // CQA: abs__holo_blue_light removed in ActionBarSherlock 4.4.0
+				mUndoButton.setBackgroundResource(R.color.abs__holo_blue_light);
 			}
 			PaintroidApplication.commandManager.undo();
 		} else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -202,7 +204,7 @@ public class TopBar extends Observable implements OnTouchListener {
 	private void onRedoTouch(MotionEvent event) {
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			if (!mRedoDisabled) {
-				mRedoButton.setBackgroundResource(R.color.abs__primary_text_holo_light); // CQA: abs__holo_blue_light removed in ActionBarSherlock 4.4.0
+				mRedoButton.setBackgroundResource(R.color.abs__holo_blue_light);
 			}
 			PaintroidApplication.commandManager.redo();
 		} else if (event.getAction() == MotionEvent.ACTION_UP) {
