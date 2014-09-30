@@ -220,6 +220,7 @@ public class UndoRedoIntegrationTest extends BaseIntegrationTestClass {
 		assertFalse("Progress Dialog is still showing", IndeterminateProgressDialog.getInstance().isShowing());
 	}
 
+	@android.test.UnstableTest
 	public void testRedoProgressDialogIsClosing() {
 		ImageButton undoButton = (ImageButton) mSolo.getView(R.id.btn_top_undo);
 		ImageButton redoButton = (ImageButton) mSolo.getView(R.id.btn_top_redo);
