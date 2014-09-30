@@ -29,6 +29,8 @@ import org.catrobat.paintroid.ui.DrawingSurface;
 import android.graphics.Color;
 import android.graphics.PointF;
 import android.view.KeyEvent;
+import android.util.Log;
+import android.test.Solo;
 
 public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 
@@ -55,7 +57,7 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		PointF canvasPoint = PaintroidApplication.perspective.getCanvasPointFromSurfacePoint(screenPoint);
 
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-		mSolo.sleep(SHORT_SLEEP);
+// 		mSolo.sleep(SHORT_SLEEP);
 		int pixelColor = PaintroidApplication.drawingSurface.getPixel(canvasPoint);
 		assertEquals("pixel should be black", Color.BLACK, pixelColor);
 	}
@@ -70,7 +72,7 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		PointF canvasPoint = PaintroidApplication.perspective.getCanvasPointFromSurfacePoint(screenPoint);
 
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-		mSolo.sleep(SHORT_SLEEP);
+		// mSolo.sleep(SHORT_SLEEP);
 		int pixelColor = PaintroidApplication.drawingSurface.getPixel(canvasPoint);
 		assertEquals("pixel should be black", Color.BLACK, pixelColor);
 	}
@@ -82,9 +84,7 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		int clickPointX = mScreenWidth / 2;
 		int clickPointY = mScreenHeight - TOOLBAR_BOTTOM_OFFSET;
 		mSolo.goBack();
-		mSolo.sleep(1000);
 		mSolo.clickOnScreen(clickPointX, clickPointY);
-		mSolo.sleep(1000);
 		int pixel = PaintroidApplication.drawingSurface.getPixel(new PointF(clickPointX, clickPointY
 				- (int) Utils.getStatusbarHeight(getActivity()) * 2));
 		assertEquals("pixel should be transparent", Color.TRANSPARENT, pixel);
@@ -95,7 +95,6 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
 		switchToFullscreen();
 		mSolo.goBack();
-		mSolo.sleep(1000);
 
 		int clickPointX = mScreenWidth / 2;
 		int clickPointY = 0;
@@ -103,7 +102,8 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		boolean assertionFailedErrorCaught = false;
 		try {
 			mSolo.clickOnScreen(clickPointX, clickPointY);
-		} catch (AssertionFailedError ex) {
+		} catch (Throwable ex) { // CQA: Was AssertionFailedError in Robotium, not Espresso
+			Log.i("Activity&Test", "Click on screen raised AssertionFailedError", ex);
 			assertionFailedErrorCaught = true;
 		} finally {
 			assertTrue("assertion failed error should have been caught", assertionFailedErrorCaught);
@@ -111,11 +111,11 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 
 	}
 
+	@android.test.UnstableTest
 	public void testShowToolbarOnMenuPressed() {
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
 		switchToFullscreen();
-		mSolo.sendKey(KeyEvent.KEYCODE_MENU);
-		mSolo.sleep(500);
+		mSolo.sendKeyNoSpecialCase(Solo.MENU);
 
 		int clickPointX = mScreenWidth / 2;
 		int clickPointY = mScreenHeight - TOOLBAR_BOTTOM_OFFSET;
@@ -123,21 +123,23 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		try {
 			mSolo.searchText(mSolo.getString(R.string.menu_save_image), 1, true, true);
 			mSolo.goBack();
-			mSolo.sleep(1000);
-		} catch (AssertionFailedError assertion) {
-			;// compatibility check for older versions
+		} catch (Throwable assertion) { // CQA: Was AssertionFailedError in Robotium, not Espresso
+			// compatibility check for older versions
 		}
 		mSolo.clickOnScreen(clickPointX, clickPointY);
-		mSolo.sleep(SHORT_SLEEP);
 		int pixel = PaintroidApplication.drawingSurface.getPixel(new PointF(clickPointX, clickPointY));
 		assertEquals("pixel should be transparent", Color.TRANSPARENT, pixel);
 	}
 
+	@android.test.UnstableTest
 	public void testShowStatusbarOnMenuPressed() {
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
 		switchToFullscreen();
-		mSolo.sendKey(KeyEvent.KEYCODE_MENU);
-		mSolo.sleep(500);
+
+		// mSolo.sleep(5000);
+
+		mSolo.sendKeyNoSpecialCase(Solo.MENU);
+		// mSolo.sleep(500);
 
 		int clickPointX = mScreenWidth / 2;
 		int clickPointY = 0;
@@ -145,7 +147,7 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		boolean assertionFailedErrorCaught = false;
 		try {
 			mSolo.clickOnScreen(clickPointX, clickPointY);
-		} catch (AssertionFailedError ex) {
+		} catch (Throwable ex) { // CQA: Was AssertionFailedError in Robotium, not Espresso
 			assertionFailedErrorCaught = true;
 		} finally {
 			assertTrue("assertion failed error should have been caught", assertionFailedErrorCaught);

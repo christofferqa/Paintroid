@@ -50,7 +50,7 @@ import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
-import com.robotium.solo.Solo;
+import android.test.Solo; // com.robotium.solo.Solo;
 
 public class BaseIntegrationTestClass extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -156,7 +156,6 @@ public class BaseIntegrationTestClass extends ActivityInstrumentationTestCase2<M
 		Log.i(PaintroidApplication.TAG, "td finish " + step++);
 		mSolo = null;
 		System.gc();
-
 	}
 
 	protected void selectTool(ToolType toolType) {
@@ -202,7 +201,6 @@ public class BaseIntegrationTestClass extends ActivityInstrumentationTestCase2<M
 	}
 
 	private void waitForToolToSwitch(ToolType toolTypeToWaitFor) {
-
 		if (!mSolo.waitForActivity(MainActivity.class.getSimpleName())) {
 			mSolo.sleep(2000);
 			assertTrue("Waiting for tool to change -> MainActivity",
@@ -228,7 +226,6 @@ public class BaseIntegrationTestClass extends ActivityInstrumentationTestCase2<M
 		GridView toolGrid = gridViews.get(0);
 		assertEquals("GridView is Tools Gridview", toolGrid.getId(), R.id.gridview_tools_menu);
 		mSolo.clickLongOnView(toolGrid.getChildAt(getToolButtonIDForType(toolType)[0]));
-
 	}
 
 	protected int[] getToolButtonIDForType(ToolType toolType) {
@@ -311,7 +308,6 @@ public class BaseIntegrationTestClass extends ActivityInstrumentationTestCase2<M
 
 	protected void switchToFullscreen() {
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_hide_menu));
-        mSolo.sleep(TIMEOUT);
 		PaintroidApplication.perspective.resetScaleAndTranslation();
 		assertFalse("SupportActionBarStillVisible", getActivity().getSupportActionBar().isShowing());
 	}

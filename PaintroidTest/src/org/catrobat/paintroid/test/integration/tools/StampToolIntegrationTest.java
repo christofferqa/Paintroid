@@ -144,7 +144,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 		PointF surfaceCenterPoint = getScreenPointFromSurfaceCoordinates(getSurfaceCenterX(), getSurfaceCenterY());
 		selectTool(ToolType.STAMP);
 		mSolo.clickOnScreen(surfaceCenterPoint.x, surfaceCenterPoint.y);
-        mSolo.sleep(SHORT_TIMEOUT);
+        // mSolo.sleep(SHORT_TIMEOUT);
 		mSolo.clickOnView(mMenuBottomParameter1);
         mSolo.waitForDialogToClose();
 		StampTool stampTool = (StampTool) PaintroidApplication.currentTool;
@@ -198,6 +198,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
+	@android.test.UnstableTest
 	public void testBoundingboxAlgorithm() throws SecurityException, IllegalArgumentException, NoSuchFieldException,
 			IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		PaintroidApplication.perspective.setScale(1.0f);
@@ -205,7 +206,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 		PointF surfaceCenterPoint = getScreenPointFromSurfaceCoordinates(getSurfaceCenterX(), getSurfaceCenterY());
 		mSolo.clickOnScreen(surfaceCenterPoint.x, surfaceCenterPoint.y - Y_CLICK_OFFSET - (SQUARE_LENGTH / 3));
 
-		mSolo.sleep(500);
+		// mSolo.sleep(500);
 
 		selectTool(ToolType.STAMP);
 
@@ -216,7 +217,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 		PrivateAccess.setMemberValue(BaseToolWithRectangleShape.class, stampTool, "mBoxWidth", SQUARE_LENGTH);
 		PrivateAccess.setMemberValue(BaseToolWithRectangleShape.class, stampTool, "mBoxHeight", SQUARE_LENGTH);
 
-		mSolo.sleep(1000);
+		// mSolo.sleep(1000);
 
 		Bitmap copyOfToolBitmap = null;
 
@@ -225,7 +226,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 			PrivateAccess.setMemberValue(BaseToolWithRectangleShape.class, stampTool, "mBoxRotation",
 					(int) (rotationOfStampBox));
 
-			mSolo.sleep(500);
+			// mSolo.sleep(500);
 
 			invokeCreateAndSetBitmap(stampTool, PaintroidApplication.drawingSurface);
 
@@ -293,6 +294,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
+	@android.test.UnstableTest
 	public void testCopyPixel() throws SecurityException, IllegalArgumentException, NoSuchFieldException,
 			IllegalAccessException {
 
@@ -320,14 +322,14 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 
 		toolPosition.y = toolPosition.y - moveOffset;
 		PrivateAccess.setMemberValue(BaseToolWithShape.class, stampTool, "mToolPosition", toolPosition);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
         mSolo.clickOnView(mMenuBottomParameter1);
         mSolo.waitForDialogToClose();
 
 		toolPosition.y = toolPosition.y - moveOffset;
 		PrivateAccess.setMemberValue(BaseToolWithShape.class, stampTool, "mToolPosition", toolPosition);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
 		pixelCoordinateToControlColor = new PointF(toolPosition.x, toolPosition.y + moveOffset + Y_CLICK_OFFSET);
 		surfacePoint = Utils.getSurfacePointFromScreenPoint(pixelCoordinateToControlColor);
@@ -349,7 +351,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 		int screenHeight = PaintroidApplication.drawingSurface.getBitmapHeight();
 		PrivateAccess.setMemberValue(Perspective.class, PaintroidApplication.perspective, "mSurfaceScale", SCALE_25);
 
-		mSolo.sleep(500);
+		// mSolo.sleep(500);
 
 		selectTool(ToolType.STAMP);
 

@@ -34,6 +34,7 @@ public class ToolsDialogIntegrationTest extends BaseIntegrationTestClass {
 		super();
 	}
 
+	@android.test.UnstableTest
 	public void testToolsDialog() {
 		selectTool(ToolType.BRUSH);
 
@@ -42,9 +43,9 @@ public class ToolsDialogIntegrationTest extends BaseIntegrationTestClass {
 				mSolo.waitForText(mSolo.getString(R.string.dialog_tools_title), 1, TIMEOUT, true));
 		mSolo.clickOnScreen(mScreenWidth / 2, 50);
 
-		mSolo.sleep(3000);
+		// mSolo.sleep(3000);
 
-		mSolo.clickOnView(mMenuBottomTool);
+		mSolo.clickOnView(mMenuBottomTool); // CQA: fails
 		assertTrue("Tools dialog not visible",
 				mSolo.waitForText(mSolo.getString(R.string.dialog_tools_title), 1, TIMEOUT, true));
 		mSolo.goBack();

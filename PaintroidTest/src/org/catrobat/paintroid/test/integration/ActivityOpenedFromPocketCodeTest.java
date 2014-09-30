@@ -15,7 +15,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.PointF;
 import android.os.Environment;
 
-import com.robotium.solo.Solo;
+import android.test.Solo; // CQA: com.robotium.solo.Solo;
 
 public class ActivityOpenedFromPocketCodeTest extends BaseIntegrationTestClass {
 
@@ -72,7 +72,7 @@ public class ActivityOpenedFromPocketCodeTest extends BaseIntegrationTestClass {
 	public void testExportNotTouchingOriginal() {
 		PointF pointOnScreen = new PointF(mScreenWidth / 2, mScreenHeight / 2);
 		mSolo.clickOnScreen(pointOnScreen.x, pointOnScreen.y);
-		mSolo.sleep(100);
+		// mSolo.sleep(100);
 
 		long lastModifiedBefore = imageFile.lastModified();
 		long fileSizeBefore = imageFile.length();
@@ -91,7 +91,7 @@ public class ActivityOpenedFromPocketCodeTest extends BaseIntegrationTestClass {
 		PointF pointOnScreen = new PointF(mScreenWidth / 2, mScreenHeight / 2);
 
 		mSolo.clickOnScreen(mScreenWidth / 2, pointOnScreen.y);
-		mSolo.sleep(SHORT_SLEEP);
+		// mSolo.sleep(SHORT_SLEEP);
 
 		mSolo.sendKey(Solo.MENU);
 		assertTrue("click on Back to Catroid", mSolo.searchText(mSolo.getString(R.string.menu_back)));

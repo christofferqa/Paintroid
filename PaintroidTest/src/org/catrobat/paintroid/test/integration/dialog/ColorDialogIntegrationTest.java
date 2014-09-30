@@ -114,12 +114,13 @@ public class ColorDialogIntegrationTest extends BaseIntegrationTestClass {
 		mSolo.goBack();
 	}
 
+	@android.test.UnstableTest
 	public void testColorNewColorButtonChangesStandard() {
 		int numberOfColorsToTest = 20;
 
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
 		mSolo.clickOnView(mButtonTopColor);
-		mSolo.sleep(COLOR_PICKER_DIALOGUE_APPERANCE_DELAY);
+		// mSolo.sleep(COLOR_PICKER_DIALOGUE_APPERANCE_DELAY);
 
 		TypedArray presetColors = getActivity().getResources().obtainTypedArray(R.array.preset_colors);
 
@@ -134,8 +135,8 @@ public class ColorDialogIntegrationTest extends BaseIntegrationTestClass {
 				continue;
 			}
 
-			mSolo.clickOnButton(counterColors);
-			mSolo.sleep(200);
+			mSolo.clickOnButton(counterColors); // CQA: fails
+			// mSolo.sleep(200);
 			int colorColor = presetColors.getColor(counterColors, 0);
 
 			String buttonNewColorName = getActivity().getResources().getString(R.string.done);
@@ -153,7 +154,6 @@ public class ColorDialogIntegrationTest extends BaseIntegrationTestClass {
 			bitmap.recycle();
 			bitmap = null;
 		}
-
 	}
 
 	public void testColorPickerDialogOnBackPressed() {

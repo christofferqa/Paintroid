@@ -10,7 +10,7 @@ import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Environment;
 
-import com.robotium.solo.Solo;
+import android.test.Solo; // CQA: com.robotium.solo.Solo;
 
 public class ActivityOpenedFromPocketCodeNewImageTest extends BaseIntegrationTestClass {
 
@@ -24,7 +24,6 @@ public class ActivityOpenedFromPocketCodeNewImageTest extends BaseIntegrationTes
 	@Override
 	public void setUp() {
 		Intent extras = new Intent();
-
 		extras.putExtra("org.catrobat.extra.PAINTROID_PICTURE_PATH", "");
 		extras.putExtra("org.catrobat.extra.PAINTROID_PICTURE_NAME", imageName);
 		setActivityIntent(extras);

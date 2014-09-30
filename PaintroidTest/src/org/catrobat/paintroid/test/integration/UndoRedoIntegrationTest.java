@@ -113,7 +113,7 @@ public class UndoRedoIntegrationTest extends BaseIntegrationTestClass {
 		PointF pointOnScreen = new PointF(pointOnBitmap.x, pointOnBitmap.y);
 		PaintroidApplication.perspective.convertFromScreenToCanvas(pointOnScreen);
 		mSolo.clickOnScreen(pointOnScreen.x, pointOnScreen.y);
-		mSolo.sleep(4000);
+		// mSolo.sleep(4000);
 
 		// move & zoom
 		float scale = 0.5f;
@@ -207,7 +207,6 @@ public class UndoRedoIntegrationTest extends BaseIntegrationTestClass {
 
 	// @FlakyTest(tolerance = 3)
 	public void testUndoProgressDialogIsShowing() {
-
 		ImageButton undoButton = (ImageButton) mSolo.getView(R.id.btn_top_undo);
 
 		PointF point = new PointF(mCurrentDrawingSurfaceBitmap.getWidth() / 2,
@@ -222,7 +221,6 @@ public class UndoRedoIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	public void testRedoProgressDialogIsClosing() {
-
 		ImageButton undoButton = (ImageButton) mSolo.getView(R.id.btn_top_undo);
 		ImageButton redoButton = (ImageButton) mSolo.getView(R.id.btn_top_redo);
 
@@ -245,7 +243,6 @@ public class UndoRedoIntegrationTest extends BaseIntegrationTestClass {
 		// assertProgressDialogShowing(); // redo is too fast, assert fails
 		mSolo.waitForDialogToClose();
 		assertFalse("Progress Dialog is still showing", IndeterminateProgressDialog.getInstance().isShowing());
-
 	}
 
 	// @Override

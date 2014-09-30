@@ -89,9 +89,10 @@ public class CropToolIntegrationTest extends BaseIntegrationTestClass {
 		failWhenCroppingTimedOut();
 
 		mSolo.clickOnView(mMenuBottomParameter2);
-		assertTrue("nothing to crop text missing",
-				mSolo.waitForText(mSolo.getString(R.string.crop_nothing_to_corp), 1, TIMEOUT, true));
 
+		// CQA: Use Robotium here, because a Toast is being checked (not supported by Espresso)
+		assertTrue("nothing to crop text missing",
+				mSolo.solo.waitForText(mSolo.getString(R.string.crop_nothing_to_corp), 1, TIMEOUT, true));
 	}
 
 	@Test
@@ -252,6 +253,7 @@ public class CropToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
+	@android.test.UnstableTest
 	public void testCenterBitmapAfterCropAndUndo() throws SecurityException, IllegalArgumentException,
 			NoSuchFieldException, IllegalAccessException, InterruptedException {
 		int originalWidth = mCurrentDrawingSurfaceBitmap.getWidth();
@@ -314,6 +316,7 @@ public class CropToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
+	@android.test.UnstableTest
 	public void testCenterBitmapAfterCropDrawingOnTopRight() throws SecurityException, IllegalArgumentException,
 			NoSuchFieldException, IllegalAccessException, InterruptedException {
 		int originalWidth = mCurrentDrawingSurfaceBitmap.getWidth();

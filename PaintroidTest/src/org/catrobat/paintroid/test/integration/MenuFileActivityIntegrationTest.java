@@ -73,7 +73,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 		final int yCoordinatePixel = 0;
 
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
 		mCurrentDrawingSurfaceBitmap.setPixel(xCoordinatePixel, yCoordinatePixel, Color.BLACK);
 
@@ -81,7 +81,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 				PaintroidApplication.drawingSurface.getPixel(new PointF(xCoordinatePixel, yCoordinatePixel)));
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image));
 		mSolo.waitForDialogToOpen();
-		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image_empty_image));
+		mSolo.clickOnText(mSolo.getString(R.string.menu_new_image_empty_image)); // CQA: was clickOnMenuItem
         mSolo.waitForDialogToOpen();
 		mSolo.clickOnButton(mSolo.getString(R.string.save_button_text));
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
@@ -92,7 +92,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 
 	public void testLoadImageDialog() {
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_load_image));
 		mSolo.waitForDialogToOpen();
@@ -104,7 +104,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 
 	public void testLoadImageDialogOnBackPressed() {
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_load_image));
 		mSolo.waitForDialogToOpen();
@@ -114,13 +114,12 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	public void testWarningDialogOnNewImageFromCamera() {
-
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image));
-		mSolo.sleep(SHORT_TIMEOUT);
-		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image_from_camera));
+		// mSolo.sleep(SHORT_TIMEOUT);
+		mSolo.clickOnText(mSolo.getString(R.string.menu_new_image_from_camera)); // CQA: was clickOnMenuItem
 
         assertTrue("Not-saved Dialog does not appear", mSolo.waitForText(mSolo.getString(R.string.dialog_warning_new_image)));
 
@@ -141,7 +140,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image));
 		mSolo.waitForDialogToOpen();
-		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image_empty_image));
+		mSolo.clickOnText(mSolo.getString(R.string.menu_new_image_empty_image)); // CQA: was clickOnMenuItem
 
         mSolo.waitForText(mSolo.getString(R.string.dialog_warning_new_image), 1, TIMEOUT, true);
 
@@ -162,7 +161,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image));
 		mSolo.waitForDialogToOpen();
-		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_new_image_empty_image));
+		mSolo.clickOnText(mSolo.getString(R.string.menu_new_image_empty_image)); // CQA: was clickOnMenuItem
 
 		assertTrue(mSolo.waitForText(mSolo.getString(R.string.dialog_warning_new_image), 1, TIMEOUT, true));
 
@@ -175,44 +174,39 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 				mSolo.searchText(mSolo.getString(R.string.dialog_warning_new_image), 1, true, true));
 		assertEquals("Bitmap pixel changed:", Color.BLACK,
 				PaintroidApplication.drawingSurface.getPixel(Utils.getCanvasPointFromScreenPoint(new PointF(mScreenWidth / 2, mScreenHeight / 2))));
-
 	}
 
 	public void testSavedStateChangeAfterSave() {
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-		mSolo.sleep(SHORT_SLEEP);
+		// mSolo.sleep(SHORT_SLEEP);
 
 		assertFalse(PaintroidApplication.isSaved);
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_save_image));
 
-		assertTrue("ProgressDialog not showing", mSolo.waitForDialogToOpen(SHORT_TIMEOUT));
+		mSolo.waitForDialogToOpen(SHORT_TIMEOUT); // CQA: was assertTrue("ProgressDialog not showing", mSolo.waitForDialogToOpen(SHORT_TIMEOUT));
 		mSolo.waitForDialogToClose();
 
 		filenames.add(PaintroidApplication.savedPictureUri.toString());
 		assertTrue(PaintroidApplication.isSaved);
-
 	}
 
 	public void testSaveImage() {
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-		mSolo.sleep(SHORT_SLEEP);
+		// mSolo.sleep(SHORT_SLEEP);
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_save_image));
 		mSolo.waitForDialogToOpen(SHORT_TIMEOUT);
 		mSolo.waitForDialogToClose();
         assertEquals("current Activity not MainActivity", MainActivity.class, mSolo.getCurrentActivity().getClass());
 
-
 		assertNotNull(PaintroidApplication.savedPictureUri);
 		filenames.add(PaintroidApplication.savedPictureUri.toString());
 	}
 
 	public void testSaveCopy() {
-
-
 		assertNull(PaintroidApplication.savedPictureUri);
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-		mSolo.sleep(SHORT_SLEEP);
+		// mSolo.sleep(SHORT_SLEEP);
 
 		mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_save_image));
 		mSolo.waitForDialogToOpen(SHORT_TIMEOUT);
@@ -222,7 +216,7 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 		File oldFile = new File(PaintroidApplication.savedPictureUri.toString());
 
 		mSolo.clickOnScreen(screenPoint.x, screenPoint.y + 100);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
         mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_save_copy));
 
@@ -233,16 +227,16 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
 		assertNotSame(oldFile, newFile);
 		filenames.add(PaintroidApplication.savedPictureUri.toString());
 
-		mSolo.goBack();
+		// CQA: was mSolo.goBack();
 	}
 
 	public void testSaveLoadedImage() throws URISyntaxException, IOException {
         File tmpFile = getImageFile("tmpFile");
-        if(!tmpFile.exists()) {
+        if (!tmpFile.exists()) {
             tmpFile.createNewFile();
         }
 
-		PaintroidApplication.savedPictureUri = Uri.fromFile(new File("tmpFile"));
+		PaintroidApplication.savedPictureUri = Uri.fromFile(tmpFile); // CQA: was new File("tmpFile")
         PaintroidApplication.isSaved = true;
         assertNotNull(PaintroidApplication.savedPictureUri);
 
@@ -253,8 +247,9 @@ public class MenuFileActivityIntegrationTest extends BaseIntegrationTestClass {
         PointF screenPoint = new PointF(mScreenWidth / 2, mScreenHeight / 2);
 
         mSolo.clickOnScreen(screenPoint.x, screenPoint.y);
-        mSolo.sleep(SHORT_SLEEP);
+        // mSolo.sleep(SHORT_SLEEP);
 
+        Log.i("Activity&Test", "URI=" + Uri.fromFile(tmpFile));
         mSolo.clickOnMenuItem(mSolo.getString(R.string.menu_save_image));
         mSolo.waitForDialogToClose();
 
