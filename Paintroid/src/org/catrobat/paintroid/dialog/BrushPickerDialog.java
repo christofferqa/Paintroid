@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import org.catrobat.paintroid.R;
 
+import android.app.Activity;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -85,8 +86,22 @@ public final class BrushPickerDialog extends DialogFragment implements
 		}
 	}
 
-	private BrushPickerDialog(Context context) {
+	/**
+	 * CQA: Required by android.support.v4.app.Fragment
+	 */
+	/*
+	public BrushPickerDialog() {
+		mBrushChangedListener = new ArrayList<BrushPickerDialog.OnBrushChangedListener>();
+	}
 
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mContext = activity;
+	}
+	*/
+
+	private BrushPickerDialog(Context context) {
 		mBrushChangedListener = new ArrayList<BrushPickerDialog.OnBrushChangedListener>();
 		mContext = context;
 	}
@@ -181,9 +196,7 @@ public final class BrushPickerDialog extends DialogFragment implements
 
 	@Override
 	public void onClick(View v) {
-
 		switch (v.getId()) {
-
 		case R.id.stroke_ibtn_circle:
 			updateStrokeCap(Cap.ROUND);
 			mRbtnCircle.setChecked(true);
@@ -209,22 +222,22 @@ public final class BrushPickerDialog extends DialogFragment implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (mCurrentPaint.getStrokeCap() == Cap.ROUND) {
-			mRbtnCircle.setChecked(true);
-		} else {
-			mRbtnRect.setChecked(true);
-		}
-		mBrushWidthSeekBar.setProgress((int) mCurrentPaint.getStrokeWidth());
+		// if (mCurrentPaint != null) { // CQA: Inserted null check
+			if (mCurrentPaint.getStrokeCap() == Cap.ROUND) {
+				mRbtnCircle.setChecked(true);
+			} else {
+				mRbtnRect.setChecked(true);
+			}
+			mBrushWidthSeekBar.setProgress((int) mCurrentPaint.getStrokeWidth());
+		// }
 	}
 
 	@Override
 	public void onClick(DialogInterface dialog, int which) {
-
 		switch (which) {
 		case AlertDialog.BUTTON_NEUTRAL:
 			dismiss();
 			break;
-
 		}
 	}
 }
