@@ -42,8 +42,8 @@ public class ActivityOpenedFromPocketCodeNewImageTest extends BaseIntegrationTes
 	}
 
 	@Test
+	@android.test.UnstableTest
 	public void testSave() {
-
 		PointF pointOnScreen = new PointF(mScreenWidth / 2, mScreenHeight / 2);
 		mSolo.clickOnScreen(pointOnScreen.x, pointOnScreen.y);
 
