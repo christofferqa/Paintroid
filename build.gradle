@@ -11,10 +11,14 @@ buildscript {
 }
 
 allprojects {
-    repositories {
-        mavenLocal()
-        mavenCentral()
+    task wrapper(type: Wrapper) {
+        gradleVersion = "1.12"
     }
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
 }
 
 apply plugin: 'android-sdk-manager'
@@ -26,8 +30,11 @@ dependencies {
     compile 'com.android.support:support-v4:19.1.0'
     compile fileTree(dir: 'Paintroid/libs', include: '*.jar')
     compile fileTree(dir: 'PaintroidTest/libs', include: '*.jar')
-    androidTestCompile 'com.jakewharton.espresso:espresso:1.1-r3'
-    androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.2.1'
+
+    compile ('dk.au.cs.thor.robotium2espresso:robotium2espresso:1.0.0') {
+        exclude module: 'hamcrest-core'
+        exclude module: 'guava'
+    }
 }
 
 android {

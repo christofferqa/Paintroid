@@ -253,7 +253,7 @@ public class CropToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCenterBitmapAfterCropAndUndo() throws SecurityException, IllegalArgumentException,
 			NoSuchFieldException, IllegalAccessException, InterruptedException {
 		int originalWidth = mCurrentDrawingSurfaceBitmap.getWidth();
@@ -316,7 +316,7 @@ public class CropToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCenterBitmapAfterCropDrawingOnTopRight() throws SecurityException, IllegalArgumentException,
 			NoSuchFieldException, IllegalAccessException, InterruptedException {
 		int originalWidth = mCurrentDrawingSurfaceBitmap.getWidth();

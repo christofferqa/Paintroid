@@ -15,7 +15,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.PointF;
 import android.os.Environment;
 
-import android.test.Solo; // CQA: com.robotium.solo.Solo;
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 public class ActivityOpenedFromPocketCodeTest extends BaseIntegrationTestClass {
 
@@ -47,7 +47,7 @@ public class ActivityOpenedFromPocketCodeTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testSave() {
 		PointF pointOnScreen = new PointF(mScreenWidth / 2, mScreenHeight / 2);
 		mSolo.clickOnScreen(pointOnScreen.x, pointOnScreen.y);

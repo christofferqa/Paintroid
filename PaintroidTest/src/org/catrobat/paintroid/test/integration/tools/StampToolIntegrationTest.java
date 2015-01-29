@@ -198,7 +198,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testBoundingboxAlgorithm() throws SecurityException, IllegalArgumentException, NoSuchFieldException,
 			IllegalAccessException, NoSuchMethodException, InvocationTargetException {
 		PaintroidApplication.perspective.setScale(1.0f);
@@ -294,7 +294,7 @@ public class StampToolIntegrationTest extends BaseIntegrationTestClass {
 	}
 
 	@Test
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testCopyPixel() throws SecurityException, IllegalArgumentException, NoSuchFieldException,
 			IllegalAccessException {
 

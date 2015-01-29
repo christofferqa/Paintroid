@@ -114,7 +114,7 @@ public class ColorDialogIntegrationTest extends BaseIntegrationTestClass {
 		mSolo.goBack();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testColorNewColorButtonChangesStandard() {
 		int numberOfColorsToTest = 20;
 

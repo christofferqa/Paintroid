@@ -50,7 +50,7 @@ import android.view.Window;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
-import android.test.Solo; // com.robotium.solo.Solo;
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 public class BaseIntegrationTestClass extends ActivityInstrumentationTestCase2<MainActivity> {
 

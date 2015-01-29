@@ -30,7 +30,7 @@ import android.graphics.Color;
 import android.graphics.PointF;
 import android.view.KeyEvent;
 import android.util.Log;
-import android.test.Solo;
+import dk.au.cs.thor.robotium2espresso.Solo;
 
 public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 
@@ -111,7 +111,7 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testShowToolbarOnMenuPressed() {
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
 		switchToFullscreen();
@@ -131,7 +131,7 @@ public class FullscreenIntegrationTest extends BaseIntegrationTestClass {
 		assertEquals("pixel should be transparent", Color.TRANSPARENT, pixel);
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testShowStatusbarOnMenuPressed() {
 		assertTrue("Waiting for DrawingSurface", mSolo.waitForView(DrawingSurface.class, 1, TIMEOUT));
 		switchToFullscreen();

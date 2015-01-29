@@ -34,7 +34,7 @@ public class ToolsDialogIntegrationTest extends BaseIntegrationTestClass {
 		super();
 	}
 
-	@android.test.UnstableTest
+	@dk.au.cs.thor.robotium2espresso.UnstableTest
 	public void testToolsDialog() {
 		selectTool(ToolType.BRUSH);
 
